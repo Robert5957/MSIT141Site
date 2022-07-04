@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - MSIT141Site</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    @await RenderSectionAsync("style", required: false)
+    @await RenderSectionAsync("Styles", required: false)
 
 </head>
 <body>
@@ -21,10 +21,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">HomeWork0701</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="HomeWork" asp-action="Register">HomeWork0704</a>
                         </li>
                     </ul>
                 </div>
@@ -33,7 +33,10 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div class="row">
+                <div class=" col-md-8">  @RenderBody()</div>
+                <div class=" col-md-4">@await RenderSectionAsync("right", required: false)</div>
+            </div>
         </main>
     </div>
 

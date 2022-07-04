@@ -1,37 +1,119 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@section style{
-<style>
-    h1 {background-color:aqua;
-    }
-</style>
- }
-<div class="text-center">
-    <button class="btn btn-primary mb-3" type="button" id="buttonClick">Click</button>
+@section Styles{
 
-    <h1 class="display-4">
-    </h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <style>
+        h1 {
+            background-color: aqua;
+        }
+
+        td {
+            border: 3px solid red;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+        }
+
+        .trEach {
+            background-color: aqua;
+        }
+    </style>
+
+}
+<div class=" col-8">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a></p>
 </div>
-@section Scripts{
-<script>
-    let btn = document.getElementById("buttonClick");
-    btn.addEventListener("click", () =>
-    {
-       var emp = {
-            "employees": [
-                { "name": "Tom", "workYears": 3, "salary": 35000 },
-                { "name": "Jack", "workYears": 5, "salary": 40000 },
-                { "name": "Mary", "workYears": 7, "salary": 45000 }
-            ]
-        };
-        for (var i = 0, max = emp.employees.length; i < max; i++)
-        {
-            console.log(emp.employees[i].name);
-            console.log(emp.employees[i].workYears);
-            console.log(emp.employees[i].salary);
-    }
 
-</script>
+@section right{
+    <button type="button" id="btnClick" class="btn btn-primary">Click</button>
+    <table id="tableTest"></table>
+}
+
+
+@section Scripts{
+    <script>
+
+        document.querySelector("#btnClick").addEventListener("click", () =>
+        {
+            //console.log("test"); $(".display-4").text("Welcome MVC");
+            var emps = [{ "name": "Tom", "workYears": 3, "salary": 35000 },
+            { "name": "Jack", "workYears": 5, "salary": 40000 },
+            { "name": "Mary", "workYears": 7, "salary": 45000 }];
+
+            let tbl = $("#tableTest");
+            let tr = document.createElement("tr");
+            td = document.createElement("td");
+            td.innerText = "name";
+            $(td).appendTo(tr);
+            td = document.createElement("td");
+            td.innerText = "workYears";
+            $(td).appendTo(tr);
+            td = document.createElement("td");
+            td.innerText = "salary";
+            $(td).appendTo(tr);
+            $(tr).appendTo(tbl);
+            tr = document.createElement("tr");
+            $(tr).appendTo(tbl);
+            for (var i = 0, max = emps.length; i < max; i++)
+            {
+                td = document.createElement("td");
+                td.innerText = emps[i].name;
+                $(td).appendTo(tr);
+                td = document.createElement("td");
+                td.innerText = emps[i].workYears;
+                $(td).appendTo(tr);
+                td = document.createElement("td");
+                td.innerText = emps[i].salary;
+                $(td).appendTo(tr);
+                tr = document.createElement("tr");
+                $(tr).appendTo(tbl);
+            }
+
+            //
+            var emp = {
+                "employees": [
+                    { "name": "Tom", "workYears": 3, "salary": 35000 },
+                    { "name": "Jack", "workYears": 5, "salary": 40000 },
+                    { "name": "Mary", "workYears": 7, "salary": 45000 }
+                ]
+            };
+            tbl = $("#tableTest");
+            tr = document.createElement("tr");
+            tr.className = "trEach"
+            td = document.createElement("td");
+            td.innerText = "name";
+            $(td).appendTo(tr);
+            td = document.createElement("td");
+            td.innerText = "workYears";
+            $(td).appendTo(tr);
+            td = document.createElement("td");
+            td.innerText = "salary";
+            $(td).appendTo(tr);
+            $(tr).appendTo(tbl);
+            tr = document.createElement("tr");
+            $(tr).appendTo(tbl);
+
+            $.each(emp.employees, (index, value) =>
+            {
+                td = document.createElement("td");
+                td.innerText = value.name;
+                $(td).appendTo(tr);
+                td = document.createElement("td");
+                td.innerText = value.workYears;
+                $(td).appendTo(tr);
+                td = document.createElement("td");
+                td.innerText = value.salary;
+                $(td).appendTo(tr);
+                tr = document.createElement("tr");
+                $(tr).appendTo(tbl);
+            });
+
+        })
+
+
+    </script>
+
+
 }

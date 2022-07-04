@@ -3,16 +3,22 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
+<h1>會員註冊</h1>
 
 <form method="post" enctype="application/x-www-form-urlencoded" name="userInfo">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="text" class="form-control" id="inputEmail" name="Email">
+
+    <div class="form-group">
+        <label for="InputName">姓名</label>
+        <input type="text" class="form-control" id="inputName" name="Name">
+        <small id="lblName" class="form-text text-muted"></small>
+    </div>
+    <div class=" mb-3">
+        <label for="InputEmail">年齡</label>
+        <input type="number" class="form-control" id="InputAge" name="age">
     </div>
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Name</label>
-        <input type="text" class="form-control" id="inputName" name="Name">
+        <label for="exampleInputEmail1" class="form-label">電子信箱</label>
+        <input type="text" class="form-control" id="inputEmail" name="Email">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
@@ -20,11 +26,24 @@
 
 @section Scripts{
     <script>
-
         const btn = document.querySelector('.btn-primary');
         const txtName = document.querySelector('#inputName');
+        const lblName=document.querySelector('#lblName')
         const divInfo = document.querySelector('#div1');
 
+        txtName.addEventListener('blur', () => {
+        const xhr = new XMLHttpRequest();
+        const formData = new FormData(document.userInfo);
+        xhr.addEventListener('load', () => {
+            const data = xhr.responseText;
+            const str = data.substring(0, 5)
+            console.log(str);
+        console.log(data);
+            if (str == "false") { lblName.innerHTML = "可以使用" } else { lblName.innerHTML = "此名字已存在, 不能使用"};
+        })
+        xhr.open("POST", `@Url.Content("~/HomeWork/Register")`);
+        xhr.send(formData);
+    })
     btn.addEventListener('click', (event) =>
     {
         event.preventDefault();
@@ -32,15 +51,13 @@
         const formData = new FormData(document.userInfo);
         xhr.addEventListener('load', () =>
         {
-            console.log('load');
+           /* console.log('load');*/
             const data = xhr.responseText;
-            divInfo.innerHTML = `<h3>${data}</h3>`;
+            const str = data.substring(5,);
+            divInfo.innerHTML = `<h3>${str}</h3>`;
         })
         xhr.open("POST", '@Url.Content("~/HomeWork/Register")');
-
         xhr.send(formData);
     });
     </script>
-
-
 }

@@ -23,9 +23,9 @@ namespace MSIT141Site.Controllers
         public IActionResult Register(User user) {
             var q = dbDemo.Members.FirstOrDefault(m => m.Name == user.Name);
             if (q == null) {
-              return Content($"{user.Name}不存在", "text/plain");
+              return Content($"false{user.Name}可以使用", "text/plain", System.Text.Encoding.UTF8);
             }
-                return Content($"{user.Name} 你好,你的年齡是{q.Age}歳", "text/plain");
+                return Content($"{user.Name} 此名字已存在, 不可使用", "text/plain", System.Text.Encoding.UTF8);
 
         }
 
