@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<form method="post" enctype="application/x-www-form-urlencoded" name="userInfo">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="text" class="form-control" id="inputEmail" name="Email">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Name</label>
+        <input type="text" class="form-control" id="inputName" name="Name">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div class="alert alert-secondary" id="div1"></div>
+
+@section Scripts{
+    <script>
+
+        const btn = document.querySelector('.btn-primary');
+        const txtName = document.querySelector('#inputName');
+        const divInfo = document.querySelector('#div1');
+
+    btn.addEventListener('click', (event) =>
+    {
+        event.preventDefault();
+        const xhr = new XMLHttpRequest();
+        const formData = new FormData(document.userInfo);
+        xhr.addEventListener('load', () =>
+        {
+            console.log('load');
+            const data = xhr.responseText;
+            divInfo.innerHTML = `<h3>${data}</h3>`;
+        })
+        xhr.open("POST", '@Url.Content("~/HomeWork/Register")');
+
+        xhr.send(formData);
+    });
+    </script>
+
+
+}

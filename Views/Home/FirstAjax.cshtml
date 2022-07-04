@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "FirstAjax";
+}
+
+@*<h1>FirstAjax</h1>*@
+@section style{
+    <style>
+        h1 {
+            background-color: aqua;
+        }
+    </style>
+}
+<div class="text-center">
+    <button class="btn btn-primary mb-3" type="button" id="btnStart">First Ajax</button>
+    <button class="btn btn-primary mb-3" type="button" id="btnAbort">Abort</button>
+    <input id="inputName" type="text" name="name1" placeholder="name" />
+    <input id="inputAge" type="number" name="name1" placeholder="age" />
+
+    <div id="div1" class="alert alert-secondary"></div>
+</div>
+@section Scripts{
+    <script>
+        const btnStart = document.querySelector("#btnStart");
+        const btnAbort = document.querySelector("#btnAbort");
+        const divInfo = document.querySelector("#div1");
+        const name = document.querySelector("#inputName");
+        const age = document.querySelector("#inputAge");
+        const xhr = new XMLHttpRequest();
+        btnStart.addEventListener('click', () => {
+            
+        //xhr.open("GET", `/Api/Index/?name=${name.value}&age=${age.value}`);
+            const url = '@Url.Content("~/Api/Index")';
+            const params = `?name=${name.value}&age=${age.value}`;
+            xhr.open("GET", url+params);
+            xhr.timeout = 5000;
+            xhr.send();
+            xhr.addEventListener('loadstart', () =>
+            {
+                console.log('loadstart');
+                btnStart.setAttribute('disabled', 'disabled');
+            })
+        xhr.addEventListener('load', () =>
+        {
+           const data = xhr.responseText;
+            divInfo.innerHTML = `<h2>${data}</h2>`
+          
+        })
+            xhr.addEventListener('loadend', () =>
+            {
+                console.log("loadend");
+                btnStart.removeAttribute('disabled');
+            })
+        })
+        btnAbort.addEventListener('click', () =>
+        {
+            xhr.addEventListener("abort", () => { console.log("abort"); })
+            
+        })
+    </script>
+}
