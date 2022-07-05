@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<div class="row">
+    <div class="col-md-2"><select id="selCity" class"custom-select custom-select-lg mb-3"></select></div>
+    <div class="col-md-2"><select id="selDist" class"custom-select custom-select-lg mb-3"></select></div>
+    <div class="col-md-2"><select id="selRoad" class"custom-select custom-select-lg mb-3"></select></div>
+</div>
+
+
+@section Scripts{
+    <script>
+        const selCity = document.querySelector("#selCity");
+        const selDist = document.querySelector("#selDist");
+        const selRoad = document.querySelector("#selRoad");
+
+        const xhr = new XMLHttpRequest();
+        selCity.addEventListener('change', () =>
+        {
+            const selectedCity = selCity.options[selCity.selectedIndex].value;
+            const url = '@Url.Content("~/Api/District")';
+            const params = `?city=${selectedCity}`;
+            xhr.addEventListener('load', () =>
+            {
+                const datas = JSON.parse(xhr.responseText);
+                console.log(datas);
+                for (var i = 0, max = datas.length; i < max; i++)
+                {
+                    opt = new Option(datas[i].SiteId, datas[i].SitedId);
+                    selDist.options.add(opt);
+                }
+
+            });
+            xhr.open("Get", url+params);
+            xhr.send();
+        });
+                xhr.addEventListener('load', () =>
+        {
+                    const datas = JSON.parse(xhr.responseText);
+                   
+            for (var i = 0, max = datas.length; i < max; i++)
+            {
+
+                opt = new Option(datas[i].city, datas[i].city);
+                selCity.options.add(opt);
+            }
+        })
+        xhr.open("GET", "/Api/City");
+        xhr.send();
+
+    </script>
+}

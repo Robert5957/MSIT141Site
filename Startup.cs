@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MSIT141Site.Models;
+using MSIT141Site_24_Ajax.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +57,7 @@ namespace MSIT141Site
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=HomeWork}/{action=Register}/{id?}");
+                    pattern: "{controller=HomeWork}/{action=Address}/{id?}");
             });
         }
     }

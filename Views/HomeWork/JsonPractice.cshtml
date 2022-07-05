@@ -1,6 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "JsonPractice";
 }
+
 @section Styles{
 
     <style>
@@ -28,7 +30,7 @@
 
 @section right{
     <button type="button" id="btnClick" class="btn btn-primary">Click</button>
-    <table id="tableTest"></table>
+    <table id="tableTest" class="table table-success table-striped"></table>
 }
 
 
@@ -79,21 +81,21 @@
                     { "name": "Mary", "workYears": 7, "salary": 45000 }
                 ]
             };
-            tbl = $("#tableTest");
-            tr = document.createElement("tr");
-            tr.className = "trEach"
-            td = document.createElement("td");
-            td.innerText = "name";
-            $(td).appendTo(tr);
-            td = document.createElement("td");
-            td.innerText = "workYears";
-            $(td).appendTo(tr);
-            td = document.createElement("td");
-            td.innerText = "salary";
-            $(td).appendTo(tr);
-            $(tr).appendTo(tbl);
-            tr = document.createElement("tr");
-            $(tr).appendTo(tbl);
+            //tbl = $("#tableTest");
+            //tr = document.createElement("tr");
+            //tr.className = "trEach"
+            //td = document.createElement("td");
+            //td.innerText = "name";
+            //$(td).appendTo(tr);
+            //td = document.createElement("td");
+            //td.innerText = "workYears";
+            //$(td).appendTo(tr);
+            //td = document.createElement("td");
+            //td.innerText = "salary";
+            //$(td).appendTo(tr);
+            //$(tr).appendTo(tbl);
+            //tr = document.createElement("tr");
+            //$(tr).appendTo(tbl);
 
             $.each(emp.employees, (index, value) =>
             {
@@ -111,7 +113,21 @@
             });
 
         })
-
+        let docFrag = $(document.createDocumentFragment());
+        $.each(emp.employees, (idx, employee) =>
+        {
+            //console.log(idx)
+            const { name, workYears, salary } = employee
+            const cell1 = $('<td></td>').text(name);
+            const cell2 = $('<td></td>').text(workYears);
+            const cell3 = $('<td></td>').text(salary);
+            const row = $('<tr></tr>').append([cell1, cell2, cell3]);
+            docFrag.append(row);
+            console.log(name)
+            console.log(workYears)
+            console.log(salary)
+        })
+        $('docFrag').appendTo(tbl);
 
     </script>
 

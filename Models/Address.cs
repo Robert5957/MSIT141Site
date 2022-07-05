@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace MSIT141Site.Models
+namespace MSIT141Site_24_Ajax.Models
 {
     public partial class Address
     {

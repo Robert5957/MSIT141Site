@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<div class="row">
+    <div class="col-md-2"><select id="selCity" class"custom-select custom-select-lg mb-3"></select></div>
+    <div class="col-md-2"><select id="selDist" class"custom-select custom-select-lg mb-3"></select></div>
+    <div class="col-md-2"><select id="selRoad" class"custom-select custom-select-lg mb-3"></select></div>
+</div>
+@section Scripts{ 
+    <script>
+    const selCity = document.querySelector("#selCity");
+    const selDist = document.querySelector("#selDist");
+    const selRoad = document.querySelector("#selRoad");
+        City();
+        selCity.addEventListener("change", Dist);
+        selDist.addEventListener("change", Road);
+       async function City() {
+            const response = await fetch('@Url.Content("~/HomeWork/Cities")');
+            const datas = await response.json();
+            datas.forEach(city => {
+                //console.log(city)
+                opt = new Option(city, city);
+                selCity.options.add(opt);
+            });
+         await Dist();
+        }
+        async function Dist()
+        {
+            selDist.textContent = "";
+            const selectedCity =  selCity.options[selCity.selectedIndex].value;
+            const response = await fetch('@Url.Content("~/HomeWork/Districts")'+`?city=${selectedCity}`);
+            const datas = await response.json();
+            datas.forEach(dist=> {
+                //console.log(dist)
+                opt = new Option(dist, dist);
+                selDist.options.add(opt);
+            });
+            await Road();
+        }
+          async function Road()
+          {
+              selRoad.textContent = "";
+            const selectedDist =  selDist.options[selDist.selectedIndex].value;
+            const response = await fetch('@Url.Content("~/HomeWork/Roads")'+`?district=${selectedDist}`);
+            const datas = await response.json();
+            datas.forEach(road=> {
+                console.log(road)
+                opt = new Option(road, road);
+                selRoad.options.add(opt);
+            });
+        }
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+}

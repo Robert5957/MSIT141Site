@@ -26,9 +26,10 @@
         const divInfo = document.querySelector("#div1");
         const name = document.querySelector("#inputName");
         const age = document.querySelector("#inputAge");
+
         const xhr = new XMLHttpRequest();
+
         btnStart.addEventListener('click', () => {
-            
         //xhr.open("GET", `/Api/Index/?name=${name.value}&age=${age.value}`);
             const url = '@Url.Content("~/Api/Index")';
             const params = `?name=${name.value}&age=${age.value}`;
@@ -54,8 +55,7 @@
         })
         btnAbort.addEventListener('click', () =>
         {
-            xhr.addEventListener("abort", () => { console.log("abort"); })
-            
+            xhr.abort();
         })
     </script>
 }

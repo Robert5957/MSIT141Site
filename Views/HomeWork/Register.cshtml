@@ -20,13 +20,13 @@
         <label for="exampleInputEmail1" class="form-label">電子信箱</label>
         <input type="text" class="form-control" id="inputEmail" name="Email">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    @*<button type="submit" class="btn btn-primary">Submit</button>*@
 </form>
 <div class="alert alert-secondary" id="div1"></div>
 
 @section Scripts{
     <script>
-        const btn = document.querySelector('.btn-primary');
+       const btn = document.querySelector('.btn-primary');
         const txtName = document.querySelector('#inputName');
         const lblName=document.querySelector('#lblName')
         const divInfo = document.querySelector('#div1');
@@ -43,21 +43,6 @@
         })
         xhr.open("POST", `@Url.Content("~/HomeWork/Register")`);
         xhr.send(formData);
-    })
-    btn.addEventListener('click', (event) =>
-    {
-        event.preventDefault();
-        const xhr = new XMLHttpRequest();
-        const formData = new FormData(document.userInfo);
-        xhr.addEventListener('load', () =>
-        {
-           /* console.log('load');*/
-            const data = xhr.responseText;
-            const str = data.substring(5,);
-            divInfo.innerHTML = `<h3>${str}</h3>`;
         })
-        xhr.open("POST", '@Url.Content("~/HomeWork/Register")');
-        xhr.send(formData);
-    });
     </script>
 }
