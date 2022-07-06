@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "jQuery";
+}
+<div class="row">
+    <div id="leftDiv" class="col-md-4">
+        
+    </div>
+    <div id="rightDiv" class="col-md-8">
+        <h1>jQuery</h1>
+        <button id="buttonGet" class="btn btn-primary">get</button>
+        <button id="buttonPost" class="btn btn-secondary">post</button>
+        <button id="buttonJson" class="btn btn-success">getJson</button>
+        <button id="buttonLoad" class="btn btn-info">load</button>
+        <button id="buttonAjax" class="btn btn-warning">ajax</button>
+        <button id="buttonCors" class="btn btn-danger">cors</button>
+        <div class="alert alert-dark mt-3 w-50" role="alert" id="divAlert"></div>
+        <table id="tbl" class="table table-bordered"></table> 
+    </div>
+
+</div>
+@section Scripts{
+    <script>
+        $('#buttonGet').click(function ()
+        {
+            $.get('@Url.Content("~/api/index")', { "name": "Jack", "age": 25 },
+                function (data) { $('#divAlert').text(data)})
+            
+        })
+        $('#buttonPost').click(function ()
+        {
+            $.post('@Url.Content("~/api/index")', { "name": "mary", "age": 30 }, function (data) { $('#divAlert').text(data)})
+           
+        })
+        $('#buttonJson').click(function (){
+            $.getJSON('@Url.Content("~/HomeWork/Districts")', { "city": "桃園市" }, function (datas)
+            {
+                /* console.log(datas)*/
+                $.each(datas, function (idx, value)
+                {
+                    console.log(value);
+
+
+                })
+            }
+            )
+        })
+        $('#buttonLoad').click(function () {
+            $('#leftDiv').load('@Url.Content("~/home/partial")')
+        })
+        $('#buttonAjax').click(function ()
+        {
+            $.ajax({
+                url: '@Url.Content("~/homework/cities")',
+                type: 'GET',
+                data: {},
+                dataType: "json"
+            }).done((datas) =>
+            {
+                let docFrag = $(document.createDocumentFragment());
+                $.each(datas, function (idx, value)
+                {
+                        const cell1 = $('<td></td>').text(value);
+                        const row = $('<tr></tr>').append([cell1]);
+                        docFrag.append(row);
+                    })
+                    $('#tbl').html(docFrag);
+            })
+            $('#divAlert').text("AJAX")
+        })
+        $('#buttonCors').click(function ()
+        {
+
+            const api = "https://localhost:44364/api/shippers"
+            $.getJSON(api, function (datas) { console.log(datas);})
+            $('#divAlert').text("CORs")
+        })
+
+    </script>
+}

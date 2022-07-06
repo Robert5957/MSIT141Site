@@ -30,11 +30,12 @@
         async function Dist()
         {
             selDist.textContent = "";
-            const selectedCity =  selCity.options[selCity.selectedIndex].value;
-            const response = await fetch('@Url.Content("~/HomeWork/Districts")'+`?city=${selectedCity}`);
+            const selectedCity = selCity.options[selCity.selectedIndex].value;
+            const url = '@Url.Content("~/HomeWork/Districts")';
+            const params = `?city=${selectedCity}`;
+            const response = await fetch(url + params);
             const datas = await response.json();
             datas.forEach(dist=> {
-                //console.log(dist)
                 opt = new Option(dist, dist);
                 selDist.options.add(opt);
             });
@@ -42,24 +43,16 @@
         }
           async function Road()
           {
-              selRoad.textContent = "";
+            selRoad.textContent = "";
             const selectedDist =  selDist.options[selDist.selectedIndex].value;
             const response = await fetch('@Url.Content("~/HomeWork/Roads")'+`?district=${selectedDist}`);
             const datas = await response.json();
             datas.forEach(road=> {
-                console.log(road)
+                //console.log(road)
                 opt = new Option(road, road);
                 selRoad.options.add(opt);
             });
         }
-
-
-
-
-
-
-
-
     </script>
 
 

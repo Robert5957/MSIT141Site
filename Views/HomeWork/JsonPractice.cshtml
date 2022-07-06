@@ -123,13 +123,12 @@
             const cell3 = $('<td></td>').text(salary);
             const row = $('<tr></tr>').append([cell1, cell2, cell3]);
             docFrag.append(row);
-            console.log(name)
-            console.log(workYears)
-            console.log(salary)
+            //console.log(name)
+            //console.log(workYears)
+            //console.log(salary)
         })
-        $('docFrag').appendTo(tbl);
+        //$('docFrag').appendTo(tbl);
+        $('#tableTest').html(docFrag);
 
     </script>
-
-
 }
